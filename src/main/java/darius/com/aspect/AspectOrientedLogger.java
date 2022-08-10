@@ -28,7 +28,16 @@ public class AspectOrientedLogger {
 
     @After("execution(* darius.com.dao.TicketDAO.bookTicket(..))")
     public void logAfterBookTicket(JoinPoint joinPoint) {
+        Long ticketNumber = (Long) joinPoint.getArgs()[0];
         fileLogger.writeToFile("After book ticket method");
+        fileLogger.writeToFile("Called book ticket with ticker number: " + ticketNumber);
+    }
+
+    @After("execution(* darius.com.dao.TicketDAO.cancelTicket(..))")
+    public void logAfterCancelTicket(JoinPoint joinPoint) {
+        Long ticketNumber = (Long) joinPoint.getArgs()[0];
+        fileLogger.writeToFile("After cancel ticket method");
+        fileLogger.writeToFile("Called cancel ticket with ticker number: " + ticketNumber);
     }
 
     @AfterThrowing("execution(* darius.com.dao.TicketDAO.login(..))")
@@ -49,11 +58,6 @@ public class AspectOrientedLogger {
     @AfterReturning(pointcut = "execution(* darius.com.dao.TicketDAO.bookTicket(..))")
     public void logAfterReturningBookTicket(JoinPoint joinPoint) {
         fileLogger.writeToFile("After returning book ticket method");
-    }
-
-    @After("execution(* darius.com.dao.TicketDAO.cancelTicket(..))")
-    public void logAfterCancelTicket(JoinPoint joinPoint) {
-        fileLogger.writeToFile("After cancel ticket method");
     }
 
     @AfterReturning(pointcut = "execution(* darius.com.dao.TicketDAO.cancelTicket(..))")
