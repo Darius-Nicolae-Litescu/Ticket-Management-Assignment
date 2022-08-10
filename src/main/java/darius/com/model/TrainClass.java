@@ -4,14 +4,14 @@ public enum TrainClass {
 
     SL(Class.SL),
     AC(Class.AC);
-    private final String roleType;
+    private final String classType;
 
-    TrainClass(String roleType) {
-        this.roleType = roleType;
+    TrainClass(String classType) {
+        this.classType = classType;
     }
 
-    public String getRoleType() {
-        return this.roleType;
+    public String getClassType() {
+        return this.classType;
     }
 
     public static class Class {
